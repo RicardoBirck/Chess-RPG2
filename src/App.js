@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+// /App.js or routes file
+
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import CharacterSelection from './components/CharacterSelection';
+import AdventurePage from './components/AdventurePage';
+import MapPage from './components/MapPage';
+import BattlePage from './components/BattlePage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        {/* First page is the CharacterSelection */}
+        <Route path="/" element={<CharacterSelection />} />
+
+        {/* After character selection, go to Adventure */}
+        <Route path="/adventure" element={<AdventurePage />} />
+
+        {/* MapPage should be based on the adventure selected */}
+        <Route path="/map/:adventure" element={<MapPage />} />
+
+        {/* BattlePage depends on the selected adventure and path */}
+        <Route path="/battle/:adventure/:path" element={<BattlePage />} />
+      </Routes>
+    </Router>
   );
 }
 

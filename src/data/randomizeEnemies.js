@@ -1,14 +1,21 @@
-import { enemies } from '../data/enemies';
+// /data/randomizeEnemies.js
 
-export const getRandomEnemies = (adventureName, pathDifficulty, numberOfEnemies = 3) => {
-  // Get the list of enemies for the selected adventure
-  const availableEnemies = enemies[adventureName];
+export const randomizeEnemies = (path) => {
+  // Enemy data for each path
+  const enemies = {
+    "Path 1": ['Goblin', 'Wolf', 'Bandit'],
+    "Path 2": ['Orc', 'Troll', 'Giant'],
+    "Path 3": ['Dragon', 'Hydra', 'Behemoth'],
+  };
 
-  // Filter enemies based on difficulty level (e.g., higher difficulty may include tougher enemies)
-  const filteredEnemies = availableEnemies.filter(enemy => enemy.attack >= pathDifficulty * 5); // Adjust this filter based on your difficulty system
+  // Select enemies based on the path
+  const selectedEnemies = enemies[path];
+  if (!selectedEnemies || selectedEnemies.length === 0) {
+    console.error(`No enemies found for ${path}`);
+    return []; // Return an empty array if no enemies are available for the path
+  }
 
-  // Shuffle the filtered enemies and pick the specified number
-  const shuffledEnemies = filteredEnemies.sort(() => 0.5 - Math.random()).slice(0, numberOfEnemies);
-
-  return shuffledEnemies;
+  // Return a random enemy from the path
+  const randomIndex = Math.floor(Math.random() * selectedEnemies.length);
+  return selectedEnemies[randomIndex];
 };
