@@ -9,7 +9,13 @@ const MapPage = () => {
   const navigate = useNavigate();
 
   if (!playerName || !selectedClass) {
-    return <div>Error: Character data not found. Please make sure you selected a character first.</div>;
+    return (
+      <div>
+        <h1>Error: Character data not found.</h1>
+        <p>Please return to the Character Selection page and create your character.</p>
+        <button onClick={() => navigate('/')}>Go to Character Selection</button>
+      </div>
+    );
   }
 
   const paths = [
@@ -26,15 +32,31 @@ const MapPage = () => {
       return;
     }
 
-    navigate(`/battle/${adventure}/${path.name}`, { state: { playerName, selectedClass, enemy: randomEnemy } });
+  
+    navigate(`/battle/${adventure}/${path.name}`, {
+      state: { playerName, selectedClass, enemy: randomEnemy },
+    });
   };
 
   return (
     <div>
+      {/* Player Info Section */}
+      <div className="player-info">
+        <h2>Welcome, {playerName} the {selectedClass.name}!</h2>
+        <h3>Your Stats:</h3>
+        <ul>
+          <li>Health: {selectedClass.stats.health}</li>
+          <li>Energy: {selectedClass.stats.energy}</li>
+          <li>Attack Power: {selectedClass.stats.attackPower}</li>
+          <li>Defense: {selectedClass.stats.defense}</li>
+        </ul>
+      </div>
+
+      {/* Adventure Map Section */}
       <h1>{adventure} - Map</h1>
-      <div>
+      <div className="map-paths">
         {paths.map((path) => (
-          <div key={path.name}>
+          <div key={path.name} className="path">
             <button onClick={() => handlePathSelection(path)}>{path.label}</button>
           </div>
         ))}

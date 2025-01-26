@@ -16,10 +16,10 @@ const BattlePage = () => {
       <h2>{playerName} the {selectedClass.name}</h2>
       <h3>Stats:</h3>
       <ul>
-        <li>Health: {selectedClass.health}</li>
-        <li>Energy: {selectedClass.energy}</li>
-        <li>Attack: {selectedClass.attack}</li>
-        <li>Defense: {selectedClass.defense}</li>
+        <li>Health: {selectedClass.stats.health}</li>
+        <li>Energy: {selectedClass.stats.energy}</li>
+        <li>Attack: {selectedClass.stats.attackPower}</li>
+        <li>Defense: {selectedClass.stats.defense}</li>
       </ul>
 
       <h3>Enemy: {enemy.name}</h3>
